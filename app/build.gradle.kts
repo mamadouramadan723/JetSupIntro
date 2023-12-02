@@ -8,7 +8,6 @@ plugins {
     kotlin("plugin.serialization") version "1.9.20"
     kotlin("kapt")
 }
-android.defaults.buildfeatures.buildconfig=true
 
 android {
     namespace = "com.rmd.jetsupintro"

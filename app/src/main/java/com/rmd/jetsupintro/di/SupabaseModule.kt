@@ -1,5 +1,7 @@
 package com.rmd.jetsupintro.di
 
+import com.rmd.jetsupintro.BuildConfig
+import com.rmd.jetsupintro.datasource.UserDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,9 +20,15 @@ object SupabaseModule {
     fun provideSupabaseClient(): SupabaseClient {
         return createSupabaseClient(
             supabaseUrl = BuildConfig.SUPABASE_URL,
-            supabaseKey = BuildConfig.API_KEY
+            supabaseKey = BuildConfig.SECRET
         ) {
             install(Postgrest)
         }
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserDataSource(client: SupabaseClient): UserDataSource {
+        return UserDataSource(client)
     }
 }
